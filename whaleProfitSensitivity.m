@@ -6,17 +6,32 @@ syms a b
 % b = 381281
 max_capacity = 531281;
 
-blue_whale_rate = matlabFunction(abs(0.05*a*(1-a/150000) - 10^-8*a*b));
-fin_whale_rate = matlabFunction(abs(0.08*b*(1-b/400000) - 10^-8*a*b));
+blue_whale_rate = matlabFunction(abs(0.05*a*(1-a/150000) - (3.56 * 10^(-7))*a*b));
+fin_whale_rate = matlabFunction(abs(0.08*b*(1-b/400000) - (3.56 * 10^(-7))*a*b));
 
-profit = 12000*blue_whale_rate(150000, 381281) + 6000*fin_whale_rate(150000, 381281);
-blue_point_five_down = 12000*blue_whale_rate(150000 * .995, max_capacity - (150000 * .995)) + 6000*fin_whale_rate(150000 * .995, max_capacity - (150000 * .995));
-blue_one_down = 12000*blue_whale_rate(150000 * .99, max_capacity - (150000 * .99)) + 6000*fin_whale_rate(150000 * .99, max_capacity - (150000 * .99));
-blue_five_down = 12000*blue_whale_rate(150000 * .95, max_capacity - (150000 * .95)) + 6000*fin_whale_rate(150000 * .95, max_capacity - (150000 * .95));
-blue_ten_down = 12000*blue_whale_rate(150000 * .9, max_capacity - (150000 * .9)) + 6000*fin_whale_rate(150000 * .9, max_capacity - (150000 * .9));
-blue_max_down = 12000*blue_whale_rate(150000 * .8752, max_capacity - (150000 * .8752)) + 6000*fin_whale_rate(150000 * .8752, max_capacity - (150000 * .8752));
-% blue can go down a max of 12.48% before the fin whale exceeds population
-% capacity
+display(blue_whale_rate(70619, 194704))
+display(fin_whale_rate(70619, 194704))
+
+
+profit = 12000*blue_whale_rate(75000, 0) + 6000*fin_whale_rate(75000, 0);
+display(profit)
+
+blue_point_five_down = 12000*blue_whale_rate(.995*70619, 194704) + 6000*fin_whale_rate(.995*70619, 194704);
+blue_one_down = 12000*blue_whale_rate(.99*70619, 194704) + 6000*fin_whale_rate(.99*70619, 194704);
+blue_five_down = 12000*blue_whale_rate(.95*70619, 194704) + 6000*fin_whale_rate(.95*70619, 194704);
+blue_ten_down = 12000*blue_whale_rate(.9*70619, 194704) + 6000*fin_whale_rate(.9*70619, 194704);
+
+
+
+fin_point_five_down = 12000*blue_whale_rate(70619, .995*194704) + 6000*fin_whale_rate(70619, .995*194704);
+fin_one_down = 12000*blue_whale_rate(70619, .99*194704) + 6000*fin_whale_rate(70619, .99*194704);
+fin_five_down = 12000*blue_whale_rate(70619, .95*194704) + 6000*fin_whale_rate(70619, .95*194704);
+fin_ten_down = 12000*blue_whale_rate(70619, .9*194704) + 6000*fin_whale_rate(70619, .9*194704);
+
+both_point_five_down = 12000*blue_whale_rate(.995*70619, .995*194704) + 6000*fin_whale_rate(.995*70619, .995*194704);
+both_one_down = 12000*blue_whale_rate(.99*70619, .99*194704) + 6000*fin_whale_rate(.99*70619, .99*194704);
+both_five_down = 12000*blue_whale_rate(.95*70619, .95*194704) + 6000*fin_whale_rate(.95*70619, .95*194704);
+both_ten_down = 12000*blue_whale_rate(.9*70619, .9*194704) + 6000*fin_whale_rate(.9*70619, .9*194704);
 
 % allowing fin whale to exceed carrying capacity increases profit.
 
@@ -27,10 +42,22 @@ disp(['Profit for 0.5% Decrease in Blue Whales: ', num2str(blue_point_five_down,
 disp(['Profit for 1% Decrease in Blue Whales: ', num2str(blue_one_down, '%0.2f'), ' Percent Decrease: ', num2str(100*(1- (blue_one_down/profit))), '%']);
 disp(['Profit for 5% Decrease in Blue Whales: ', num2str(blue_five_down, '%0.2f'), ' Percent Decrease: ', num2str(100*(1- (blue_five_down/profit))), '%']);
 disp(['Profit for 10% Decrease in Blue Whales: ', num2str(blue_ten_down, '%0.2f'), ' Percent Decrease: ', num2str(100*(1- (blue_ten_down/profit))), '%']);
-disp(['Profit for 12.48% Decrease in Blue Whales: ', num2str(blue_max_down, '%0.2f'), ' Percent Decrease: ', num2str(100*(1- (blue_max_down/profit))), '%']);
+%disp(['Profit for 12.48% Decrease in Blue Whales: ', num2str(blue_max_down, '%0.2f'), ' Percent Decrease: ', num2str(100*(1- (blue_max_down/profit))), '%']);
+
+
+disp('FIN WHALES')
+disp(['Profit for 0.5% Decrease in Fin Whales: ', num2str(fin_point_five_down, '%0.2f'), ' Percent Decrease: ', num2str(100*(1- (fin_point_five_down/profit))), '%']);
+disp(['Profit for 1% Decrease in Fin Whales: ', num2str(fin_one_down, '%0.2f'), ' Percent Decrease: ', num2str(100*(1- (fin_one_down/profit))), '%']);
+disp(['Profit for 5% Decrease in Fin Whales: ', num2str(fin_five_down, '%0.2f'), ' Percent Decrease: ', num2str(100*(1- (fin_five_down/profit))), '%']);
+disp(['Profit for 10% Decrease in Fin Whales: ', num2str(fin_ten_down, '%0.2f'), ' Percent Decrease: ', num2str(100*(1- (fin_ten_down/profit))), '%']);
 
 
 
+disp('BOTH WHALES')
+disp(['Profit for 0.5% Decrease in Both Whales: ', num2str(both_point_five_down, '%0.2f'), ' Percent Decrease: ', num2str(100*(1- (both_point_five_down/profit))), '%']);
+disp(['Profit for 1% Decrease in Both Whales: ', num2str(both_one_down, '%0.2f'), ' Percent Decrease: ', num2str(100*(1- (both_one_down/profit))), '%']);
+disp(['Profit for 5% Decrease in Both Whales: ', num2str(both_five_down, '%0.2f'), ' Percent Decrease: ', num2str(100*(1- (both_five_down/profit))), '%']);
+disp(['Profit for 10% Decrease in Both Whales: ', num2str(both_ten_down, '%0.2f'), ' Percent Decrease: ', num2str(100*(1- (both_ten_down/profit))), '%']);
 
 
 
